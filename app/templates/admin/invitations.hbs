@@ -1,0 +1,26 @@
+<h1>Invitations</h1>
+{{#if model}}
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>E-Mail</td>
+            <td>Delete Invite</td>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each model as |invitation|}}
+            <tr>
+                <td>{{invitation.id}}</td>
+                <td>{{invitation.email}}</td>
+                <td>
+                    <button class="btn btn-danger btn-xs" {{action 'deleteInvite' invitation}}>Delete</button>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{else}}
+    <h4>No Invites Yet!</h4>
+{{/if}}

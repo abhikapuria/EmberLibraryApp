@@ -1,0 +1,61 @@
+<h1>Books</h1>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                Title
+                {{#if showAddOptions}}
+                    {{input type="text" value=model.book.title class="form-control" placeholder="Book Title"}}
+                {{else}}
+                    <br><small class="small not-bold">(Click on Title for editing)</small>
+                {{/if}}
+            </th>
+            <th>
+                Author
+                {{#if showAddOptions}}
+                    {{input type="text" value=model.book.author class="form-control" placeholder="Author Name"}}
+                {{else}}
+                    <br><small class="small not-bold">(Click on Author for editing)</small>
+                {{/if}}
+            </th>
+            <th>
+                Library
+                {{#if showAddOptions}}
+                    <select class="form-control" onchange={{action "selectedLibrary" value="target.value"}}>
+                        <option value="-1" selected="selected">Select Library</option>
+                        {{#each model.libraries as |lib|}}
+                            <option value={{lib.id}} selected={{is-equal libraryId lib}}>{{lib.name}}</option>
+                        {{/each}}
+                    </select>
+                {{else}}
+                    <br><small class="small not-bold">(Click on Library for editing)</small>
+                {{/if}}
+            </th>
+            <th>
+                <button class="btn btn-primary .btn-sm" {{action "addBook" model.book}}>{{buttonText}}</button>
+                {{#if showAddOptions}}
+                    <button class="btn btn-danger .btn-sm" {{action "cancel"}}>Cancel</button>
+                {{/if}}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each model.books as |book index|}}
+        {{#if (gt index 0) }}
+        <tr>
+            <td>{{book.title}}</td>
+            <td>
+                {{book.author}}
+            </td>
+            <td>
+                {{book.library.name}} &nbsp;&nbsp;
+                <span>{{book.library.phone}}</span>
+            </td>
+            <td>
+                Add Save and Cancel button on click of text
+            </td>           
+        </tr>
+        {{/if}}
+        {{/each}}
+    </tbody>
+</table>
